@@ -1,9 +1,8 @@
 $( document ).ready(function() {
     
+    setTimeout(function(){ Materialize.toast('Bienvenido!', 2000) }, 1000);
+    //setTimeout(function(){ Materialize.toast('You have 4 new notifications', 4000) }, 11000);
     
-    
-    setTimeout(function(){ Materialize.toast('Bienvenido!', 4000) }, 4000);
- 
     
     
     // CounterUp Plugin
@@ -19,7 +18,7 @@ $( document ).ready(function() {
             }
         });
     });
-    
+    /*
     // Peity Chart
     $.fn.peity.defaults.pie = {
         delimiter: null,
@@ -28,9 +27,12 @@ $( document ).ready(function() {
         radius: 8,
         width: null
     };
-    $("span.pie").peity("pie")
+    
+    $("span.pie").peity("pie");
     
     // Radar Chart
+    
+    
     var ctx3 = document.getElementById("radar-chart").getContext("2d");
     var data3 = {
         labels: ["Eat", "Drink", "Sleep", "Work", "Code", "Cycle", "Run"],
@@ -304,4 +306,7 @@ $( document ).ready(function() {
             DrawSparkline();
         }, 300);
     });
+    
+    */
 });
+

@@ -58,6 +58,7 @@ $route['logout'] = 'welcome/logout';
 //------- RUTAS DEL ADMIN
 
 $route['administrador'] = 'administrador/index';
+$route['vista_servicio'] = 'administrador/vistaServicio';
 
 //-----------------------
 

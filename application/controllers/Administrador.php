@@ -19,7 +19,7 @@ class Administrador extends CI_Controller {
         }
     }
     
-    public function servicio(){
+    public function vistaServicio(){
         //EXISTE LA SESION?
         if ($this->session->userdata("usuario")) {
             $this->load->view("administrador/servicio");
