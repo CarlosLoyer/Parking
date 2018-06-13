@@ -1,12 +1,12 @@
-<!-- Modal Structure insert-->
+<!-- ESTRUCTURA DEL MODAL DE REGISTRO DE NUEVO SERVICIO -->
 <div id="modal_cliente" class="modal">
     <div class="modal-content">
         <h4 class="center-align">Ingresar Vehìculo</h4>
         <form method="post">
             <div class='row'>
                 <div class='col s6'>
-                    <input id='serv_patente' type="text" placeholder="Rut" >
-                    <input id='serv_hora_entrada' type="text" placeholder="Nombre" >
+                    <input id='serv_patente' type="text" placeholder="Patente" >
+                    <input id='serv_hora_entrada' type="text" placeholder="Hora entrada" >
                 </div>
                 <div class='col s6'>
                     <input id='telefono_cliente' type="tel" placeholder="Telefono" >
@@ -24,8 +24,8 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" id='bt_add_perfil' class='btn'>
-                CREAR CLIENTE
+            <button type="submit" id='bt_add_reg' class='btn'>
+                INGRESAR
             </button>
         </form>
     </div>
@@ -36,37 +36,61 @@
 <div class='card-panel'>
     <div class="row">
         <div class="col s12">
-            <h4 class="center-align">MODULO CLIENTE</h4>
+            <h4 class="center-align">REGISTRO DE SERVICIO</h4>
 
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal_cliente">
+            <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal_reg">
                 <i class='material-icons'>add</i>
             </a>
             <br />
             <table class='bordered'>
                 <thead>
                     <tr>
-                        <th>Rut</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Mail</th>   
-                        <th>Telefono</th>
-                        <th>Región</th>
-                        <th>Provincia</th>
-                        <th>Comuna</th>
-                        <th>Giro</th>
-                        <th>Razon Social</th>
-                        <th>Dirección</th>
-                        <th>Acción</th>
+                        <th>Codigo</th>
+                        <th>Patente</th>
+                        <th>Hora Entrada</th>
+                        <th>Estado</th>
+                        <th>Cerrar</th>
+                        <th>Estado</th>
+
                     </tr>
                 </thead>
-                <tbody id='tbody_perfil'>
+                <tbody id='tbody_reg'>
 
                 </tbody>
             </table>
 
         </div>
     </div>
+    <br/>
+    
+    <div class="row">
+        <div class="col s12">
+            <h4 class="center-align">REGISTRO DE SERVICIO</h4>
+
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal_reg">
+                <i class='material-icons'>add</i>
+            </a>
+            <br />
+            <table class='bordered'>
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Patente</th>
+                        <th>Hora Entrada</th>
+                        <th>Estado</th>
+                        <th>Cerrar</th>
+                    </tr>
+                </thead>
+                <tbody id='tbody_reg'>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    
 </div>
 
 
@@ -78,11 +102,11 @@
 
 
 
-    getRegiones();
+    getRegistros();
 
 
-    function getRegiones() {
-        var url = base_url + "regiones";
+    function getRegistros() {
+        var url = base_url + "registros";
 
         $.getJSON(url, function (result) {
             $.each(result, function (i, o) {
