@@ -60,6 +60,8 @@ $route['logout'] = 'welcome/logout';
 $route['administrador'] = 'administrador/index';
 $route['vista_servicio'] = 'administrador/vistaServicio';
 
+$route['registros_pend'] = 'administrador/registros_pend';
+
 //-----------------------
 
 $route['404_override'] = 'Error404';

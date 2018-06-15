@@ -1,6 +1,6 @@
 <?php
 
-class AdministradorModel {
+class AdministradorModel extends CI_Model{
     
     
     public function insertarServicio($patente, $hora_entrada){
@@ -20,7 +20,9 @@ class AdministradorModel {
         return $this->db->detele("reg_servicio");
     }
     
-    public function servicios(){
+    public function servicios_pend(){
+        $estado = "Pendiente";
+        $this->db->where("estado", $estado);
         return $this->db->get("reg_servicio")->result();
     }
     

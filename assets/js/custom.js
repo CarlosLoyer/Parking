@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     //CARGA ELEMENTOS EN EL DESDE EL MENU AL MAIN
 
-/*
+
     $("body").on("click", "#item_reg_servicio", function (e) {
 
         $("main").load(base_url + "vista_servicio");
@@ -44,15 +44,14 @@ $(document).ready(function () {
 
     });
     
-     */
 
-
+/*
     $("#item_reg_servicio").on("click", function (e) {
         e.preventDefault();
         $("main").load(base_url + "administrador/vistaServicio");
         $("a").removeClass("active-page");
         $("#item_reg_servicio").addClass("active-page");
     });
-
+*/
 
 });

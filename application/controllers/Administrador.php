@@ -18,15 +18,22 @@ class Administrador extends CI_Controller {
             redirect('login');
         }
     }
-    
-    public function vistaServicio(){
+
+    public function vistaServicio() {
         //EXISTE LA SESION?
         if ($this->session->userdata("usuario")) {
             $this->load->view("administrador/servicio");
-        }else{
+        } else {
             redirect("login");
         }
-        
+    }
+
+    public function registros_pend() {
+        echo json_encode($this->AdministradorModel->servicios_pend());
+    }
+
+    public function registros_cerrados() {
+        echo json_encode($this->AdministradorModel->servicios());
     }
 
 }

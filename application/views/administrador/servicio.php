@@ -1,28 +1,14 @@
 <!-- ESTRUCTURA DEL MODAL DE REGISTRO DE NUEVO SERVICIO -->
-<div id="modal_cliente" class="modal">
+<div id="modal_reg" class="modal" style="width: 20%">
     <div class="modal-content">
-        <h4 class="center-align">Ingresar Vehìculo</h4>
+        <h4 class="center-align">Ingresar Vehículo</h4>
         <form method="post">
             <div class='row'>
-                <div class='col s6'>
+                <div class='col s12'>
                     <input id='serv_patente' type="text" placeholder="Patente" >
                     <input id='serv_hora_entrada' type="text" placeholder="Hora entrada" >
                 </div>
-                <div class='col s6'>
-                    <input id='telefono_cliente' type="tel" placeholder="Telefono" >
-                    <div class="input-field col s12">
-                        <select id="region">
-                        </select>
-                    </div>
-                    <div class="input-field col s12">
-                        <select id="provincia">
-                        </select>
-                    </div>
-                    <div class="input-field col s12">
-                        <select id="comuna">
-                        </select>
-                    </div>
-                </div>
+
             </div>
             <button type="submit" id='bt_add_reg' class='btn'>
                 INGRESAR
@@ -36,7 +22,7 @@
 <div class='card-panel'>
     <div class="row">
         <div class="col s12">
-            <h4 class="center-align">REGISTRO DE SERVICIO</h4>
+            <h4 class="center-align">INGRESOS PENDIENTES</h4>
 
             <!-- Modal Trigger -->
             <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal_reg">
@@ -51,8 +37,7 @@
                         <th>Hora Entrada</th>
                         <th>Estado</th>
                         <th>Cerrar</th>
-                        <th>Estado</th>
-
+                        <th>Cancelar</th>
                     </tr>
                 </thead>
                 <tbody id='tbody_reg'>
@@ -63,15 +48,11 @@
         </div>
     </div>
     <br/>
-    
+
     <div class="row">
         <div class="col s12">
-            <h4 class="center-align">REGISTRO DE SERVICIO</h4>
+            <h4 class="center-align">INGRESOS CERRADOS</h4>
 
-            <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal_reg">
-                <i class='material-icons'>add</i>
-            </a>
             <br />
             <table class='bordered'>
                 <thead>
@@ -79,18 +60,22 @@
                         <th>Codigo</th>
                         <th>Patente</th>
                         <th>Hora Entrada</th>
+                        <th>Hora Salida</th>
+                        <th>Fecha Salida</th>
+                        <th>Total Horas</th>
+                        <th>Total Pago</th>
+                        <th>Forma de Pago</th>
                         <th>Estado</th>
-                        <th>Cerrar</th>
                     </tr>
                 </thead>
-                <tbody id='tbody_reg'>
+                <tbody id='tbody_reg_end'>
 
                 </tbody>
             </table>
 
         </div>
     </div>
-    
+
 </div>
 
 
@@ -100,11 +85,25 @@
         height: "100%"
     });
 
-
-
     getRegistros();
 
-
+    function getRegistros() {
+        $("#tbody_reg").empty();
+        $.getJSON(URL + "registros_pend", function (result) {
+            $.each(result, function (i, o) {
+                var row = "<tr>";
+                row += "<td>" + o.id_reg + "</td>";
+                row += "<td>" + o.patente + "</td>";
+                row += "<td>" + o.hora_entrada + "</td>";
+                row += "<td>" + o.estado + "</td>";
+                row += "<td><a id='btn_cerrar_serv' class='btn-floating waves-effect'><i class='material-icons'>local_atm</i></a></td>";
+                row += "<td><a id='btn_cancel_serv' class='btn-floating waves-effect'><i class='material-icons'>close</i></a></td>";
+                row += "</tr>";
+                $("#tbody_reg").append(row);
+            });
+        });
+    }
+/*
     function getRegistros() {
         var url = base_url + "registros";
 
@@ -117,7 +116,7 @@
         });
 
     }
-
+   
     $("#region").on("change", function (e) {
         e.preventDefault();
         var id_region = $("#region").val();
@@ -168,5 +167,8 @@
         });
 
     });
+    
+     */
+
 
 </script>
