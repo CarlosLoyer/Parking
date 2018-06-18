@@ -59,8 +59,12 @@ $route['logout'] = 'welcome/logout';
 
 $route['administrador'] = 'administrador/index';
 $route['vista_servicio'] = 'administrador/vistaServicio';
+$route['vista_config'] = 'administrador/vistaConfig';
 
 $route['registros_pend'] = 'administrador/registros_pend';
+
+$route['insertarServicio'] = 'administrador/insertarServicio';
+$route['eliminarServicio'] = 'administrador/eliminarServicio';
 
 //-----------------------
 

@@ -136,33 +136,18 @@
                         </ul>
                     </div>
                     <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
-                        <li class="no-padding active"><a class="waves-effect waves-grey active" href="<?php echo base_url(); ?>administrador"><i class="material-icons">settings_input_svideo</i>Inicio</a></li>
+                        <li class="no-padding active"><a class="waves-effect waves-grey active" href="<?php echo base_url(); ?>administrador"><i class="material-icons">home</i>Inicio</a></li>
                         <!-- MENU SERVICIOS PRINCIPALES -->
                         <li class="no-padding active"><a class="waves-effect waves-grey active" href="#" id="item_reg_servicio"><i class="material-icons">directions_car</i>Ingreso</a></li>
-
-                        <!--
-                        <li class="no-padding">
-                            <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">apps</i>Estacionamiento<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a id="item_reg_servicio" href="#">Ingresar</a></li>
-                                    <li><a href="search.html">Pagar</a></li>
-                                    <li><a href="todo.html">Cancelar</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        -->
-
-
                         <!-- -->
                         <!-- MENU SERVICIOS ARRIENDO -->
                         <li class="no-padding">
                             <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">explicit</i>Arriendo<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="mailbox.html">Ingresar</a></li>
-                                    <li><a href="search.html">Ver Contratos</a></li>
-                                    <li><a href="todo.html">Pagar Mes</a></li>
+                                    <li><a href="#">Ingresar</a></li>
+                                    <li><a href="#">Ver Contratos</a></li>
+                                    <li><a href="#">Pagar Mes</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -172,11 +157,14 @@
                             <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">code</i>Reportes<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="ui-accordions.html">Ingresos (Fecha)</a></li>
-                                    <li><a href="ui-badges.html">Vehiculos</a></li>
+                                    <li><a href="#">Ingresos (Fecha)</a></li>
+                                    <li><a href="#">Vehiculos</a></li>
                                 </ul>
                             </div>
                         </li>
+                        <!--  -->
+                        <!-- MENU CONFIGURACION -->
+                        <li class="no-padding active"><a class="waves-effect waves-grey active" href="#" id="item_config"><i class="material-icons">settings</i>Configuración</a></li>
                         <!--  -->
 
                     </ul>

@@ -43,15 +43,26 @@ $(document).ready(function () {
 
 
     });
-    
 
-/*
-    $("#item_reg_servicio").on("click", function (e) {
-        e.preventDefault();
-        $("main").load(base_url + "administrador/vistaServicio");
+
+
+    //CARGA PANTALLA CONFIGURACION
+    $("body").on("click", "#item_config", function (e) {
+
+        $("main").load(base_url + "vista_config");
         $("a").removeClass("active-page");
-        $("#item_reg_servicio").addClass("active-page");
+        $("#item_config").addClass("active-page");
+
+
     });
-*/
+
+    /*
+     $("#item_reg_servicio").on("click", function (e) {
+     e.preventDefault();
+     $("main").load(base_url + "administrador/vistaServicio");
+     $("a").removeClass("active-page");
+     $("#item_reg_servicio").addClass("active-page");
+     });
+     */
 
 });
