@@ -5,7 +5,7 @@
         <form method="post">
             <div class='row'>
                 <div class='col s12'>
-                    <input id='serv_patente' type="text" placeholder="Patente" autofocus="true">
+                    <input id='serv_patente' type="text" placeholder="Patente" autofocus="true" onchange="return formateaPatente();">
                     <input id='serv_hora_entrada' type="text" placeholder="Hora entrada" readonly="true" >
                     <input id='serv_hora_entrada_completa' type="text" readonly="true" style="display: none">
                 </div>
@@ -18,25 +18,62 @@
     </div>
 </div>
 
+<!-- MODAL CERRAR REGISTRO -->
+<div id="modal_serv_close" class="modal">
+    <div class="modal-content">
+        <h4 class="center-align">Cerrar Servicio</h4>
+        <form method="post">
+            <div class='row'>
+                <div class='col s6'>
+                    <input id='id_serv_close' type="text" value="id">
+                    <input id='pat_serv_close' type="text" value="patente">
+                    <input id='pat_serv_close' type="text" value="patente">
+                    <input id='pat_serv_close' type="text" value="patente">
+                    <input id='pat_serv_close' type="text" value="patente">
+
+                </div>
+                <div class='col s6'>
+                    <input id='pospat_serv_close' type="text" value="se supondria q aqui va la patente">
+                    <input id='pospat_serv_close' type="text" value="se supondria q aqui va la patente">
+                    <div class="input-field col s12">
+                        <select id="cb_forma_pago">
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" id='bt_close_servicio' class='btn'>
+                PAGAR SERVICIO
+            </button>
+        </form>
+    </div>
+</div>
+<!-- FIN MODAL CERRAR REGISTRO -->
+
 <!-- MODAL ELIMINAR REGISTRO (CONFIRMACION) -->
 <div id="modal_serv_del" class="modal" style='width: 35%'>
     <div class="modal-content">
         <form method="post">
-            <div class='row'>
-                <div class='col s12'>
-                    <input id='id_serv_del' type="text" style='display: none' >
-                    <h3 style='font-size: 23px; color: red'>Está apunto de eliminar el registro de patente:</h3>
-                    <h3 style='font-size: 17px; font-weight: bolder' id='patente_serv_del'></h3>
-                    <p>
-                        <input type="checkbox" class="filled-in" id="chk_del_servicio" />
-                        <label for="chk_del_servicio">Confirmar</label>
-                    </p>
-                </div>
+            <div id="div_del1"> 
+                <div class='row'>
+                    <div class='col s12'>
+                        <input id='id_serv_del' type="text" style='display: none' >
+                        <h3 style='font-size: 23px; color: red'>Está apunto de eliminar el registro de patente:</h3>
+                        <h3 style='font-size: 17px; font-weight: bolder' id='patente_serv_del'></h3>
+                        <p>
+                            <input type="checkbox" class="filled-in" id="chk_del_servicio" />
+                            <label for="chk_del_servicio">Confirmar</label>
+                        </p>
+                    </div>
 
+                </div>
+                <button type="submit" id='bt_del_servicio' class='btn disabled' disabled>
+                    ELIMINAR REGISTRO
+                </button>
             </div>
-            <button type="submit" id='bt_del_servicio' class='btn disabled' disabled>
-                ELIMINAR REGISTRO
-            </button>
+            <div id="div_del2">
+                <h4 style="color: red">No puede eliminar un registro de mas de 5 minutos!</h4>
+            </div>
         </form>
     </div>
 </div>
@@ -54,7 +91,7 @@
                 <i class='material-icons'>add</i>
             </a>
             <br />
-            <table class='bordered'>
+            <table class='bordered striped'>
                 <thead>
                     <tr>
                         <th>Codigo</th>
@@ -79,7 +116,7 @@
             <h4 class="center-align">INGRESOS CERRADOS</h4>
 
             <br />
-            <table class='bordered'>
+            <table class='bordered striped'>
                 <thead>
                     <tr>
                         <th>Codigo</th>
@@ -110,7 +147,21 @@
         height: "100%"
     });
 
+    getFormasPago();
+
     getRegistros();
+
+
+    function getFormasPago() {
+        $.getJSON(URL + "formas_pago", function (result) {
+            $.each(result, function (i, o) {
+                // var opt = new Option(o.nombre_region,o.id_region);
+                $("#cb_forma_pago").append(new Option(o.nombre_forma_pago, o.id_forma_pago));
+                $('select').material_select();
+            });
+        });
+
+    }
 
     function getRegistros() {
         $("#tbody_reg").empty();
@@ -173,6 +224,30 @@
         var id = $(this).parent().parent().children()[0];
         var patente = $(this).parent().parent().children()[1];
 
+        var id_int = parseInt($(id).text());
+        var test = "a";
+
+        $.getJSON(URL + "registros_pend", id_int, function (result) {
+
+            $.each(result, function (i, o) {
+                // AQUI CAPTURAMOS EL ELEMENTO CORRESPONDIENTE A LA FILA EN LA TABLA
+                if (id_int === parseInt(o.id_reg)) {
+                    if (Math.abs(new Date() - new Date(o.hora_entrada)) >= 300000) {
+                        Materialize.toast("Más de 5 min!", "3000");
+                        document.getElementById("div_del1").style.display = 'none';
+                        document.getElementById("div_del2").style.display = '';
+
+                    } else {
+                        Materialize.toast("Puede borrarla!", "3000");
+                        document.getElementById("div_del2").style.display = 'none';
+                        document.getElementById("div_del1").style.display = '';
+                    }
+                }
+            });
+        });
+
+
+
         $('#bt_del_servicio').addClass('disabled');
         document.getElementById("bt_del_servicio").disabled = true;
 
@@ -181,7 +256,7 @@
 
         //escribir en el modal
         $("#id_serv_del").val($(id).text());
-        document.getElementById('patente_serv_del').innerHTML = '> ' + $(patente).text() + ' <';
+        document.getElementById('patente_serv_del').innerHTML = '> ' + $(patente).text() + "test: " + test + ' <';
         $('#modal_serv_del').openModal();
     });
     //fin funcion cargar ID
@@ -232,99 +307,39 @@
     });
     //fin funcion eliminar
 
+
     //SCRIPT QUE FORMATEA PATENTE AL INGRESARLA
-    /*
-    function formateaPatente(patente) {
+    function formateaPatente() {
+        var patente = document.getElementById("serv_patente").value;
+        var actual = patente.toString().replace(/\./g, "");
+        var actual1 = actual.toString().replace(/\ /g, "");
+        var actual2 = actual1.toString().replace(/\-/g, "");
 
-        var actual = patente.replace(/-./, "");
-        if (actual !== '' && actual.length > 1) {
-            var sinPuntos = actual.replace(/\./g, "");
-            var actualLimpio = sinPuntos.replace(/-/g, "");
-            var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-            var rutPuntos = "";
-            var i = 0;
-            var j = 1;
-            for (i = inicio.length - 1; i >= 0; i--) {
-                var letra = inicio.charAt(i);
-                rutPuntos = letra + rutPuntos;
-                if (j % 3 == 0 && j <= inicio.length - 1) {
-                    rutPuntos = "." + rutPuntos;
+        var final = "";
+        if (actual2 !== '' && actual2.length > 1) {
+            for (var i = 1; i < actual2.length + 1; i++) {
+                final += actual2[i - 1];
+                if (i % 2 === 0 && i < 6) {
+                    final += "-";
                 }
-                j++;
             }
-            var dv = actualLimpio.substring(actualLimpio.length - 1);
-            rutPuntos = rutPuntos + "-" + dv;
         }
-        return rutPuntos;
-    }
-*/
 
-    /*
-     function getRegistros() {
-     var url = base_url + "registros";
-     
-     $.getJSON(url, function (result) {
-     $.each(result, function (i, o) {
-     // var opt = new Option(o.nombre_region,o.id_region);
-     $("#region").append(new Option(o.nombre_region, o.id_region));
-     $('select').material_select();
-     });
-     });
-     
-     }
-     
-     $("#region").on("change", function (e) {
-     e.preventDefault();
-     var id_region = $("#region").val();
-     $("#provincia").empty();
-     $("#comuna").empty();
-     $.ajax({
-     url: base_url + 'provincias',
-     type: 'post',
-     dataType: 'json',
-     data: {idregion: id_region},
-     success: function (o) {
-     $.each(o, function (i, o) {
-     // var opt = new Option(o.nombre_region,o.id_region);
-     $("#provincia").append(new Option(o.nombre_provincia, o.id_provincia));
-     $('select').material_select();
-     });
-     },
-     error: function () {
-     alert("eror");
-     }
-     
-     });
-     
-     });
-     
-     
-     
-     $("#provincia").on("change", function (e) {
-     e.preventDefault();
-     var id_provincia = $("#provincia").val();
-     $("#comuna").empty();
-     $.ajax({
-     url: base_url + 'comunas',
-     type: 'post',
-     dataType: 'json',
-     data: {idprovincia: id_provincia},
-     success: function (o) {
-     $.each(o, function (i, o) {
-     // var opt = new Option(o.nombre_region,o.id_region);
-     $("#comuna").append(new Option(o.nombre_comuna, o.id_comuna));
-     $('select').material_select();
-     });
-     },
-     error: function () {
-     alert("eror");
-     }
-     
-     });
-     
-     });
-     
-     */
+        final = final.toString().toUpperCase();
+        document.getElementById("serv_patente").value = final;
+    }
+
+
+    //FUNCION QUE PERMITE CARGAR LOS VALORES AL PINCHAR SOBRE EL BOTON CERRAR EN LA TABLA
+    $("body").on("click", "#btn_cerrar_servicio", function (e) {
+        e.preventDefault();
+
+        $('#modal_serv_close').openModal();
+    });
+    //fin funcion cargar valores
+
+
+
 
 
 </script>

@@ -73,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
@@ -94,3 +95,30 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+
+//para testeo hoting
+/*
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => '198.27.119.152',
+	'username' => 'rtcingen_root',
+	'password' => 'Socoin.2018',
+	'database' => 'rtcingen_parking',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+*/

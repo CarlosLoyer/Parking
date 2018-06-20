@@ -19,6 +19,10 @@ class AdministradorModel extends CI_Model {
         return $this->db->get("reg_servicio")->result();
     }
 
+    public function formas_pago() {
+        return $this->db->get("forma_pago")->result();
+    }
+
     public function insertarServicio($patente, $hora_entrada) {
         $data = array("patente" => $patente, "hora_entrada" => $hora_entrada, "estado" => "Pendiente");
         return $this->db->insert("reg_servicio", $data);

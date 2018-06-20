@@ -61,6 +61,8 @@ $route['administrador'] = 'administrador/index';
 $route['vista_servicio'] = 'administrador/vistaServicio';
 $route['vista_config'] = 'administrador/vistaConfig';
 
+$route['formas_pago'] = 'administrador/formasPago';
+
 $route['registros_pend'] = 'administrador/registros_pend';
 
 $route['insertarServicio'] = 'administrador/insertarServicio';

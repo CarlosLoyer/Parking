@@ -24,8 +24,13 @@
         <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
 
         <script>
+            //para testeo local
             var URL = "http://localhost:8080/Parking/";
             var base_url = "http://localhost:8080/Parking/";
+            
+            //para testeo en hosting
+            //var URL = "http://parking.rtcingenieros.cl/";
+            //var base_url = "http://parking.rtcingenieros.cl/";
         </script>
 
 

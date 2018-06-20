@@ -1,6 +1,10 @@
 $(document).ready(function () {
 
+    //para testeo local
     var base_url = "http://localhost:8080/Parking/";
+    
+    //para testeo en hosting
+    //var base_url = "http://parking.rtcingenieros.cl/";
 
     $("#bt_login").click(function (e) {
         e.preventDefault();

@@ -72,6 +72,10 @@ class Administrador extends CI_Controller {
         }
     }
 
+    public function formasPago() {
+        echo json_encode($this->AdministradorModel->formas_pago());
+    }
+
     public function registros_pend() {
         echo json_encode($this->AdministradorModel->servicios_pend());
     }
