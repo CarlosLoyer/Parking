@@ -59,7 +59,7 @@
                                                    <label for="password_login">Password</label>
                                                </div>
                                                <div class="col s12 right-align m-t-sm">
-                                                   <a href="<?php echo base_url();?>recuperar" class="waves-effect waves-grey btn-flat">Rec.Clave</a>
+                                                   <a href="<?php echo base_url();?>recuperar" class="waves-effect waves-grey btn-flat" style="display: none">Rec.Clave</a>
                                                    <button id="bt_login" class="waves-effect waves-light btn teal">Ingresar</button>
                                                </div>
                                            </form>

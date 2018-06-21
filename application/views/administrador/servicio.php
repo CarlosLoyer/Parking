@@ -21,30 +21,65 @@
 <!-- MODAL CERRAR REGISTRO -->
 <div id="modal_serv_close" class="modal">
     <div class="modal-content">
-        <h4 class="center-align">Cerrar Servicio</h4>
+        <h3 class="center-align">Cerrar Servicio</h3>
         <form method="post">
             <div class='row'>
                 <div class='col s6'>
-                    <input id='id_serv_close' type="text" value="id">
-                    <input id='pat_serv_close' type="text" value="patente">
-                    <input id='pat_serv_close' type="text" value="patente">
-                    <input id='pat_serv_close' type="text" value="patente">
-                    <input id='pat_serv_close' type="text" value="patente">
+                    <div class="input-field col s12" style="display: none">
+                        <label for="id_serv_close">ID</label>
+                        <input id='id_serv_close' type="text" placeholder="ID" readonly>
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="pat_serv_close">Patente</label>
+                        <input id='pat_serv_close' type="text" placeholder="Patente" readonly>
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="hora_entrada_serv_close">Hora entrada</label>
+                        <input id='hora_entrada_serv_close' type="text" placeholder="Hora Entrada" readonly>
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="hora_salida_serv_close">Hora salida</label>
+                        <input id='hora_salida_serv_close' type="text" placeholder="Hora Salida" readonly>
+
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="fecha_salida_serv_close">Fecha salida</label>
+                        <input id='fecha_salida_serv_close' type="text" placeholder="Fecha Salida" readonly>
+                    </div>
 
                 </div>
+
                 <div class='col s6'>
-                    <input id='pospat_serv_close' type="text" value="se supondria q aqui va la patente">
-                    <input id='pospat_serv_close' type="text" value="se supondria q aqui va la patente">
+
+                    <div class="input-field col s12">
+                        <label for="tot_horas_serv_close">Total de horas</label>
+                        <input id='tot_horas_serv_close' type="text" placeholder="Total de Horas" readonly style="color: #58ACFA">
+
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="tot_pago_serv_close">Total a Pagar</label>
+                        <input id='tot_pago_serv_close' type="text" placeholder="Total a Pagar" readonly style="color: #5FB404">
+
+                    </div>
                     <div class="input-field col s12">
                         <select id="cb_forma_pago">
                         </select>
+                        <label for="cb_forma_pago">Forma de Pago</label>
                     </div>
+
+                    <input id='hora_salida_serv_close_full' type="text" style="display: none">
+                    <input id='tot_horas_serv_close_full' type="text" style="display: none">
+                    <input id='tot_pago_serv_close_full' type="text" style="display: none">
                 </div>
 
+                <div class="col s3 offset-s9">
+                    <button type="submit" id='bt_close_servicio' class='btn'>
+                        PAGAR SERVICIO
+                    </button>
+                </div>
             </div>
-            <button type="submit" id='bt_close_servicio' class='btn'>
-                PAGAR SERVICIO
-            </button>
+
+
         </form>
     </div>
 </div>
@@ -147,6 +182,8 @@
         height: "100%"
     });
 
+    Materialize.updateTextFields();
+
     getFormasPago();
 
     getRegistros();
@@ -191,7 +228,7 @@
     }
     //fin cargar fechas
 
-    //FUNCION QUE PERMITE AÑADIR UN PUNTO TURISTICO TRAS PINCHAR EL BOTON "CREAR PUNTO" EN EL MODAL
+    //FUNCION QUE PERMITE AÑADIR UN REGISTRO DE SERVICIO TRAS PINCHAR EL BOTON "CREAR" EN EL MODAL
     $("#bt_add_reg").bind("click", function (e) {
         e.preventDefault();
         var patente = $("#serv_patente").val();
@@ -216,7 +253,7 @@
             });
         }
     });
-    //fin funcion añadir punto
+    //fin funcion añadir registro
 
     //FUNCION QUE PERMITE CARGAR EL ID AL PINCHAR SOBRE EL BOTON ELIMINAR EN LA TABLA
     $("body").on("click", "#btn_del_servicio", function (e) {
@@ -225,27 +262,6 @@
         var patente = $(this).parent().parent().children()[1];
 
         var id_int = parseInt($(id).text());
-        var test = "a";
-
-        $.getJSON(URL + "registros_pend", id_int, function (result) {
-
-            $.each(result, function (i, o) {
-                // AQUI CAPTURAMOS EL ELEMENTO CORRESPONDIENTE A LA FILA EN LA TABLA
-                if (id_int === parseInt(o.id_reg)) {
-                    if (Math.abs(new Date() - new Date(o.hora_entrada)) >= 300000) {
-                        Materialize.toast("Más de 5 min!", "3000");
-                        document.getElementById("div_del1").style.display = 'none';
-                        document.getElementById("div_del2").style.display = '';
-
-                    } else {
-                        Materialize.toast("Puede borrarla!", "3000");
-                        document.getElementById("div_del2").style.display = 'none';
-                        document.getElementById("div_del1").style.display = '';
-                    }
-                }
-            });
-        });
-
 
 
         $('#bt_del_servicio').addClass('disabled');
@@ -256,8 +272,28 @@
 
         //escribir en el modal
         $("#id_serv_del").val($(id).text());
-        document.getElementById('patente_serv_del').innerHTML = '> ' + $(patente).text() + "test: " + test + ' <';
-        $('#modal_serv_del').openModal();
+        document.getElementById('patente_serv_del').innerHTML = '> ' + $(patente).text() + ' <';
+
+        $.getJSON(URL + "registros_pend", id_int, function (result) {
+
+            $.each(result, function (i, o) {
+                // AQUI CAPTURAMOS EL ELEMENTO CORRESPONDIENTE A LA FILA EN LA TABLA
+                if (id_int === parseInt(o.id_reg)) {
+                    if (Math.abs(new Date() - new Date(o.hora_entrada)) >= 300000) {
+                        document.getElementById("div_del1").style.display = 'none';
+                        document.getElementById("div_del2").style.display = '';
+                        Materialize.toast("No puede eliminar un registro de más de 5 minutos.", "2000");
+
+                    } else {
+                        document.getElementById("div_del2").style.display = 'none';
+                        document.getElementById("div_del1").style.display = '';
+                        $('#modal_serv_del').openModal();
+                    }
+                }
+            });
+        });
+
+
     });
     //fin funcion cargar ID
 
@@ -278,7 +314,7 @@
     //fin funcion checkbox "confirmar"
 
 
-    //FUNCION QUE PERMITE ELIMINAR UN PUNTO
+    //FUNCION QUE PERMITE ELIMINAR UN REGISTRO DE SERVICIO
     $("#bt_del_servicio").bind("click", function (e) {
         e.preventDefault();
         var id = $("#id_serv_del").val();
@@ -333,10 +369,90 @@
     //FUNCION QUE PERMITE CARGAR LOS VALORES AL PINCHAR SOBRE EL BOTON CERRAR EN LA TABLA
     $("body").on("click", "#btn_cerrar_servicio", function (e) {
         e.preventDefault();
+        var id = $(this).parent().parent().children()[0];
+
+        var id_int = parseInt($(id).text());
+
+        $.getJSON(URL + "registros_pend", id_int, function (result) {
+            $.each(result, function (i, o) {
+                // AQUI CAPTURAMOS EL ELEMENTO CORRESPONDIENTE A LA FILA EN LA TABLA
+                if (parseInt(id_int) === parseInt(o.id_reg)) {
+
+                    var currentdate = new Date();
+                    document.getElementById('id_serv_close').value = o.id_reg;
+                    document.getElementById('pat_serv_close').value = o.patente;
+                    document.getElementById('hora_entrada_serv_close').value = (new Date(o.hora_entrada).getHours() < 10 ? '0' : '') + new Date(o.hora_entrada).getHours() +
+                            ":" + (new Date(o.hora_entrada).getMinutes() < 10 ? '0' : '') + new Date(o.hora_entrada).getMinutes();
+
+                    document.getElementById('hora_salida_serv_close').value = (currentdate.getHours() < 10 ? '0' : '') + currentdate.getHours()
+                            + ":" + (currentdate.getMinutes() < 10 ? '0' : '') + currentdate.getMinutes();
+                    //campo invisible con datetime completo de hora de salida
+                    document.getElementById('hora_salida_serv_close_full').value = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate.getDate() + " " + currentdate.getHours()
+                            + ":" + (currentdate.getMinutes() < 10 ? '0' : '') + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
+                    document.getElementById('fecha_salida_serv_close').value = (currentdate.getDate() < 10 ? '0' : '') + currentdate.getDate() + "-" +
+                            ((currentdate.getMonth() + 1) < 10 ? '0' : '') + (currentdate.getMonth() + 1) + "-" + currentdate.getFullYear();
+
+                    var total_horas_dec = Math.abs(currentdate - new Date(o.hora_entrada));
+                    var total_horas = ((total_horas_dec / 1000) / 60) / 60;
+                    var total_horas_int = parseInt(total_horas);
+                    var total_minutos = parseInt((total_horas_dec / 1000) / 60) % 60;
+
+                    document.getElementById('tot_horas_serv_close').value = parseInt(total_horas) + ":" + (total_minutos < 10 ? '0' : '') + total_minutos;
+                    document.getElementById('tot_horas_serv_close_full').value = (total_horas_int + (total_minutos >= 30 ? 0.5 : 0));
+
+
+                    $.getJSON(URL + "config_valor_hora", function (result) {
+                        $.each(result, function (i, o) {
+                            document.getElementById('tot_pago_serv_close').value = "$" + ((total_horas_int + (total_minutos >= 30 ? 0.5 : 0)) * o.valor);
+                            document.getElementById('tot_pago_serv_close_full').value = ((total_horas_int + (total_minutos >= 30 ? 0.5 : 0)) * o.valor);
+                        });
+                    });
+
+
+                }
+            });
+        });
+
 
         $('#modal_serv_close').openModal();
     });
     //fin funcion cargar valores
+
+    //FUNCION QUE PERMITE CERRAR UN REGISTRO DE SERVICIO
+    $("#bt_close_servicio").bind("click", function (e) {
+        e.preventDefault();
+        var id = $("#id_serv_close").val();
+        var hora_salida = $("#hora_salida_serv_close_full").val();
+        var tot_horas = $("#tot_horas_serv_close_full").val();
+        var tot_pago = $("#tot_pago_serv_close_full").val();
+
+        var e_fpago = document.getElementById("cb_forma_pago");
+        var id_forma_pago = e_fpago.options[e_fpago.selectedIndex].value;
+
+
+        var key = "3F!9#";
+        $.ajax({
+            url: URL + 'actualizarServicio',
+            type: 'post',
+            dataType: 'json',
+            data: {id: id, hora_salida: hora_salida, tot_horas: tot_horas, tot_pago: tot_pago, id_forma_pago: id_forma_pago, key: key},
+            success: function (o) {
+                Materialize.toast(o.msg, "3000");
+                getRegistros();
+            },
+            error: function () {
+                Materialize.toast("500", "3000");
+            }
+        });
+
+
+        $("#modal_serv_close").closeModal();
+
+
+
+    });
+    //fin funcion cerrar
 
 
 

@@ -64,10 +64,13 @@ $route['vista_config'] = 'administrador/vistaConfig';
 $route['formas_pago'] = 'administrador/formasPago';
 
 $route['registros_pend'] = 'administrador/registros_pend';
+$route['config_valor_hora'] = 'administrador/valorHora';
+
 
 $route['insertarServicio'] = 'administrador/insertarServicio';
 $route['eliminarServicio'] = 'administrador/eliminarServicio';
-
+$route['actualizarServicio'] = 'administrador/actualizarServicio';
+$route['actualizarValorHora'] = 'administrador/actualizarValorHora';
 //-----------------------
 
 $route['404_override'] = 'Error404';

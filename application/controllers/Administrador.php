@@ -53,6 +53,43 @@ class Administrador extends CI_Controller {
         }
     }
 
+    //FUNCION QUE PERMITE ACTUALIZAR UN REGISTRO DE SERVICIO EN LA BASE DE DATOS
+    public function actualizarServicio() {
+        $id_reg = $this->input->post("id");
+        $hora_salida = $this->input->post("hora_salida");
+        $total_horas = $this->input->post("tot_horas");
+        $total_pago = $this->input->post("tot_pago");
+        $forma_pago = $this->input->post("id_forma_pago");
+
+        $clave = $this->input->post("key");
+
+        if ($clave === "3F!9#") {
+            if ($this->AdministradorModel->actualizarServicio($id_reg, $hora_salida, $total_horas, $total_pago, $forma_pago)) {
+                echo json_encode(array("msg" => "Servicio cerrado!"));
+            } else {
+                echo json_encode(array("msg" => "Ha ocurrido un error en la BD!"));
+            }
+        } else {
+            echo json_encode(array("msg" => "Validacion rechazada"));
+        }
+    }
+
+    //FUNCION QUE PERMITE ACTUALIZAR EL VALOR HORA EN LA BASE DE DATOS
+    public function actualizarValorHora() {
+        $valor = $this->input->post("valor");
+        $clave = $this->input->post("key");
+
+        if ($clave === "3F!9#") {
+            if ($this->AdministradorModel->actualizarValorHora($valor)) {
+                echo json_encode(array("msg" => "Valor actualizado!"));
+            } else {
+                echo json_encode(array("msg" => "Ha ocurrido un error en la BD!"));
+            }
+        } else {
+            echo json_encode(array("msg" => "Validacion rechazada"));
+        }
+    }
+
     public function vistaServicio() {
         //EXISTE LA SESION?
         if ($this->session->userdata("usuario")) {
@@ -74,6 +111,10 @@ class Administrador extends CI_Controller {
 
     public function formasPago() {
         echo json_encode($this->AdministradorModel->formas_pago());
+    }
+
+    public function valorHora() {
+        echo json_encode($this->AdministradorModel->valorHora());
     }
 
     public function registros_pend() {

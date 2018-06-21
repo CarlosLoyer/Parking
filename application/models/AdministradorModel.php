@@ -2,10 +2,16 @@
 
 class AdministradorModel extends CI_Model {
 
-    public function salidaServicio($id_reg, $hora_salida, $fecha_salida, $total_horas, $total_pago, $id_forma_pago) {
+    public function actualizarServicio($id_reg, $hora_salida, $total_horas, $total_pago, $id_forma_pago) {
         $this->db->where("id_reg", $id_reg);
-        $data = array("hora_salida" => $hora_salida, "fecha_salida" => $fecha_salida, "total_horas" => $total_horas, "total_pago" => $total_pago, "id_forma_pago" => $id_forma_pago);
+        $data = array("hora_salida" => $hora_salida, "fecha_salida" => $hora_salida, "total_horas" => $total_horas, "total_pago" => $total_pago, "id_forma_pago" => $id_forma_pago, "estado" => "Cerrada");
         return $this->db->update("reg_servicio", $data);
+    }
+
+    public function actualizarValorHora($valor) {
+        $this->db->where("id_config", 1);
+        $data = array("valor" => $valor);
+        return $this->db->update("config", $data);
     }
 
     public function eliminarServicio($id_reg) {
@@ -21,6 +27,11 @@ class AdministradorModel extends CI_Model {
 
     public function formas_pago() {
         return $this->db->get("forma_pago")->result();
+    }
+
+    public function valorHora() {
+        $this->db->where("id_config", 1);
+        return $this->db->get("config")->result();
     }
 
     public function insertarServicio($patente, $hora_entrada) {
