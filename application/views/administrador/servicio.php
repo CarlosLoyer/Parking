@@ -1,19 +1,19 @@
 <!-- ESTRUCTURA DEL MODAL DE REGISTRO DE NUEVO SERVICIO -->
-<div id="modal_reg" class="modal" style="width: 20%">
+<div id="modal_reg" class="modal" style="width: fit-content">
     <div class="modal-content">
         <h4 class="center-align">Ingresar Vehículo</h4>
         <form method="post">
             <div class='row'>
-                <div class='col s12'>
+                <div class='col s12 m12'>
                     <input id='serv_patente' type="text" placeholder="Patente" autofocus="true" onchange="return formateaPatente();">
                     <input id='serv_hora_entrada' type="text" placeholder="Hora entrada" readonly="true" >
                     <input id='serv_hora_entrada_completa' type="text" readonly="true" style="display: none">
+                    <button type="submit" id='bt_add_reg' class='btn'>
+                        INGRESAR
+                    </button>
                 </div>
 
             </div>
-            <button type="submit" id='bt_add_reg' class='btn'>
-                INGRESAR
-            </button>
         </form>
     </div>
 </div>
@@ -24,47 +24,54 @@
         <h3 class="center-align">Cerrar Servicio</h3>
         <form method="post">
             <div class='row'>
-                <div class='col s6'>
-                    <div class="input-field col s12" style="display: none">
+                <div class='col s12 m12'>
+                    <div class="input-field col s6 m6" style="display: none">
                         <label for="id_serv_close">ID</label>
                         <input id='id_serv_close' type="text" placeholder="ID" readonly>
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s6 m6">
                         <label for="pat_serv_close">Patente</label>
                         <input id='pat_serv_close' type="text" placeholder="Patente" readonly>
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s6 m6">
                         <label for="hora_entrada_serv_close">Hora entrada</label>
                         <input id='hora_entrada_serv_close' type="text" placeholder="Hora Entrada" readonly>
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s6 m6">
                         <label for="hora_salida_serv_close">Hora salida</label>
                         <input id='hora_salida_serv_close' type="text" placeholder="Hora Salida" readonly>
 
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s6 m6">
                         <label for="fecha_salida_serv_close">Fecha salida</label>
                         <input id='fecha_salida_serv_close' type="text" placeholder="Fecha Salida" readonly>
                     </div>
 
                 </div>
 
-                <div class='col s6'>
+                <div class='col s12 m12'>
 
-                    <div class="input-field col s12">
+                    <div class="input-field col s12 m12">
                         <label for="tot_horas_serv_close">Total de horas</label>
                         <input id='tot_horas_serv_close' type="text" placeholder="Total de Horas" readonly style="color: #58ACFA">
 
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s12 m12">
                         <label for="tot_pago_serv_close">Total a Pagar</label>
                         <input id='tot_pago_serv_close' type="text" placeholder="Total a Pagar" readonly style="color: #5FB404">
 
                     </div>
-                    <div class="input-field col s12">
+
+                    <div class="input-field col s12 m6 left">
                         <select id="cb_forma_pago">
                         </select>
                         <label for="cb_forma_pago">Forma de Pago</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 right-align">
+                        <button type="submit" id='bt_close_servicio' class='btn'>
+                            PAGAR SERVICIO
+                        </button>
                     </div>
 
                     <input id='hora_salida_serv_close_full' type="text" style="display: none">
@@ -73,9 +80,7 @@
                 </div>
 
                 <div class="col s3 offset-s9">
-                    <button type="submit" id='bt_close_servicio' class='btn'>
-                        PAGAR SERVICIO
-                    </button>
+
                 </div>
             </div>
 
@@ -86,12 +91,12 @@
 <!-- FIN MODAL CERRAR REGISTRO -->
 
 <!-- MODAL ELIMINAR REGISTRO (CONFIRMACION) -->
-<div id="modal_serv_del" class="modal" style='width: 35%'>
+<div id="modal_serv_del" class="modal" style="width: fit-content">
     <div class="modal-content">
         <form method="post">
             <div id="div_del1"> 
                 <div class='row'>
-                    <div class='col s12'>
+                    <div class='col s12 m12'>
                         <input id='id_serv_del' type="text" style='display: none' >
                         <h3 style='font-size: 23px; color: red'>Está apunto de eliminar el registro de patente:</h3>
                         <h3 style='font-size: 17px; font-weight: bolder' id='patente_serv_del'></h3>
@@ -118,7 +123,7 @@
 
 <div class='card-panel'>
     <div class="row">
-        <div class="col s12">
+        <div class="col s12 m12">
             <h4 class="center-align">INGRESOS PENDIENTES</h4>
 
             <!-- Modal Trigger -->
@@ -126,7 +131,7 @@
                 <i class='material-icons'>add</i>
             </a>
             <br />
-            <table class='bordered striped'>
+            <table class='bordered striped responsive-table'>
                 <thead>
                     <tr>
                         <th>Codigo</th>
@@ -151,7 +156,7 @@
             <h4 class="center-align">INGRESOS CERRADOS</h4>
 
             <br />
-            <table class='bordered striped'>
+            <table class='bordered striped responsive-table'>
                 <thead>
                     <tr>
                         <th>Codigo</th>
@@ -262,7 +267,7 @@
         var patente = $(this).parent().parent().children()[1];
 
         var id_int = parseInt($(id).text());
-
+        var key = "3F!9#";
 
         $('#bt_del_servicio').addClass('disabled');
         document.getElementById("bt_del_servicio").disabled = true;
@@ -273,13 +278,35 @@
         //escribir en el modal
         $("#id_serv_del").val($(id).text());
         document.getElementById('patente_serv_del').innerHTML = '> ' + $(patente).text() + ' <';
+        /*
+         $.getJSON(URL + "registros_pend", id_int, function (result) {
+         
+         $.each(result, function (i, o) {
+         // AQUI CAPTURAMOS EL ELEMENTO CORRESPONDIENTE A LA FILA EN LA TABLA
+         if (id_int === parseInt(o.id_reg)) {
+         if (Math.abs(new Date() - new Date(o.hora_entrada)) >= 300000) {
+         document.getElementById("div_del1").style.display = 'none';
+         document.getElementById("div_del2").style.display = '';
+         Materialize.toast("No puede eliminar un registro de más de 5 minutos.", "2000");
+         
+         } else {
+         document.getElementById("div_del2").style.display = 'none';
+         document.getElementById("div_del1").style.display = '';
+         $('#modal_serv_del').openModal();
+         }
+         }
+         });
+         });
+         */
 
-        $.getJSON(URL + "registros_pend", id_int, function (result) {
-
-            $.each(result, function (i, o) {
-                // AQUI CAPTURAMOS EL ELEMENTO CORRESPONDIENTE A LA FILA EN LA TABLA
-                if (id_int === parseInt(o.id_reg)) {
-                    if (Math.abs(new Date() - new Date(o.hora_entrada)) >= 300000) {
+        $.ajax({
+            url: base_url + 'registros_pend_id',
+            type: 'post',
+            dataType: 'json',
+            data: {id_reg: id_int, key: key},
+            success: function (o) {
+                if (id_int === parseInt(o[0].id_reg)) {
+                    if (Math.abs(new Date() - new Date(o[0].hora_entrada)) >= 300000) {
                         document.getElementById("div_del1").style.display = 'none';
                         document.getElementById("div_del2").style.display = '';
                         Materialize.toast("No puede eliminar un registro de más de 5 minutos.", "2000");
@@ -290,7 +317,12 @@
                         $('#modal_serv_del').openModal();
                     }
                 }
-            });
+
+            },
+            error: function () {
+                Materialize.toast("Error 500", "3000");
+            }
+
         });
 
 
@@ -457,5 +489,5 @@
 
 
 
-
+//CURDATE();
 </script>

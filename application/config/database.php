@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-
+/*
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
@@ -95,10 +95,10 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
+*/
 
 //para testeo hoting
-/*
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '198.27.119.152',
@@ -121,4 +121,3 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-*/

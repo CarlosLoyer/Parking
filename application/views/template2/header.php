@@ -25,12 +25,12 @@
 
         <script>
             //para testeo local
-            var URL = "http://localhost:8080/Parking/";
-            var base_url = "http://localhost:8080/Parking/";
+            //var URL = "http://localhost:8080/Parking/";
+            //var base_url = "http://localhost:8080/Parking/";
             
             //para testeo en hosting
-            //var URL = "http://parking.rtcingenieros.cl/";
-            //var base_url = "http://parking.rtcingenieros.cl/";
+            var URL = "http://parking.rtcingenieros.cl/";
+            var base_url = "http://parking.rtcingenieros.cl/";
         </script>
 
 
@@ -146,7 +146,7 @@
                         <li class="no-padding active"><a class="waves-effect waves-grey active" href="#" id="item_reg_servicio"><i class="material-icons">directions_car</i>Ingreso</a></li>
                         <!-- -->
                         <!-- MENU SERVICIOS ARRIENDO -->
-                        <li class="no-padding">
+                        <li class="no-padding" style="display: none">
                             <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">explicit</i>Arriendo<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                             <div class="collapsible-body">
                                 <ul>
@@ -162,8 +162,7 @@
                             <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">code</i>Reportes<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#">Ingresos (Fecha)</a></li>
-                                    <li><a href="#">Vehiculos</a></li>
+                                    <li><a href="#" id="item_rep_ingresos"><i class="material-icons">attach_money</i>Ingresos</a></li>
                                 </ul>
                             </div>
                         </li>

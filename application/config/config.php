@@ -24,10 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //para testeo local
-$config['base_url'] = 'http://localhost:8080/Parking/';
+//$config['base_url'] = 'http://localhost:8080/Parking/';
 
 //para testeo en hosting
-//$config['base_url'] = 'http://parking.rtcingenieros.cl/';
+$config['base_url'] = 'http://parking.rtcingenieros.cl/';
 
 /*
 |--------------------------------------------------------------------------

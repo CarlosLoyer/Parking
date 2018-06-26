@@ -90,6 +90,9 @@ class Administrador extends CI_Controller {
         }
     }
 
+    //VISTAS
+
+
     public function vistaServicio() {
         //EXISTE LA SESION?
         if ($this->session->userdata("usuario")) {
@@ -109,6 +112,16 @@ class Administrador extends CI_Controller {
         }
     }
 
+    //CARGA VISTA CONFIGURACION
+    public function vistaRepIngresos() {
+        //ESTA CREADA LA SESSION DEL ADMIN?
+        if ($this->session->userdata("usuario")) {
+            $this->load->view('administrador/rep_ingresos');
+        } else {
+            redirect('login');
+        }
+    }
+
     public function formasPago() {
         echo json_encode($this->AdministradorModel->formas_pago());
     }
@@ -121,8 +134,25 @@ class Administrador extends CI_Controller {
         echo json_encode($this->AdministradorModel->servicios_pend());
     }
 
+    public function registros_pendPorId() {
+        $id_reg = $this->input->post("id_reg");
+        echo json_encode($this->AdministradorModel->registros_pendPorId($id_reg));
+    }
+
     public function registros_cerrados() {
         echo json_encode($this->AdministradorModel->servicios());
+    }
+
+    public function totalPagos() {
+        echo json_encode($this->AdministradorModel->getTotalPagos());
+    }
+
+    public function totalPagosFecha() {
+        $fecha1 = $this->input->post("fecha1");
+        $fecha2 = $this->input->post("fecha2");
+        $key = $this->input->post("key");
+
+        echo json_encode($this->AdministradorModel->getTotalPagosFecha($fecha1, $fecha2));
     }
 
 }

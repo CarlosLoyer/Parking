@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
     //para testeo local
-    var base_url = "http://localhost:8080/Parking/";
-    
+    //var base_url = "http://localhost:8080/Parking/";
+
     //para testeo en hosting
-    //var base_url = "http://parking.rtcingenieros.cl/";
+    var base_url = "http://parking.rtcingenieros.cl/";
 
     $("#bt_login").click(function (e) {
         e.preventDefault();
@@ -40,7 +40,8 @@ $(document).ready(function () {
 
 
     $("body").on("click", "#item_reg_servicio", function (e) {
-
+        e.preventDefault();
+        
         $("main").load(base_url + "vista_servicio");
         $("a").removeClass("active-page");
         $("#item_reg_servicio").addClass("active-page");
@@ -60,6 +61,15 @@ $(document).ready(function () {
 
     });
 
+    //CARGA PANTALLA REPORTES
+    $("body").on("click", "#item_rep_ingresos", function (e) {
+
+        $("main").load(base_url + "vista_rep_ingresos");
+        $("a").removeClass("active-page");
+        $("#item_rep_ingresos").addClass("active-page");
+
+
+    });
     /*
      $("#item_reg_servicio").on("click", function (e) {
      e.preventDefault();

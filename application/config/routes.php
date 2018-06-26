@@ -60,10 +60,14 @@ $route['logout'] = 'welcome/logout';
 $route['administrador'] = 'administrador/index';
 $route['vista_servicio'] = 'administrador/vistaServicio';
 $route['vista_config'] = 'administrador/vistaConfig';
+$route['vista_rep_ingresos'] = 'administrador/vistaRepIngresos';
 
 $route['formas_pago'] = 'administrador/formasPago';
+$route['total_pagos'] = 'administrador/totalPagos';
+$route['total_pagos_fecha'] = 'administrador/totalPagosFecha';
 
 $route['registros_pend'] = 'administrador/registros_pend';
+$route['registros_pend_id'] = 'administrador/registros_pendPorId';
 $route['config_valor_hora'] = 'administrador/valorHora';
 
 

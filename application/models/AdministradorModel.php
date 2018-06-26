@@ -24,7 +24,11 @@ class AdministradorModel extends CI_Model {
         $this->db->where("estado", $estado);
         return $this->db->get("reg_servicio")->result();
     }
-
+    
+    public function registros_pendPorId($id_reg) {
+        $this->db->where("id_reg", $id_reg);
+        return $this->db->get("reg_servicio")->result();
+    }
     public function formas_pago() {
         return $this->db->get("forma_pago")->result();
     }
@@ -39,4 +43,17 @@ class AdministradorModel extends CI_Model {
         return $this->db->insert("reg_servicio", $data);
     }
 
+    public function getTotalPagos() {
+        $this->db->select_sum("total_pago");
+        $this->db->from("reg_servicio");
+        return $this->db->get()->result();
+    }
+    
+    public function getTotalPagosFecha($fecha1, $fecha2) {
+        $this->db->select_sum("total_pago");
+        $this->db->where("fecha_salida >= ", $fecha1);
+        $this->db->where("fecha_salida <= ", $fecha2);
+        $this->db->from("reg_servicio");
+        return $this->db->get()->result();
+    }
 }
